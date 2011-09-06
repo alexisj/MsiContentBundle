@@ -5,10 +5,10 @@
 .right {float:right !important;}
 .hidden {display:none;}
 
-a {text-decoration:none;}
+a {text-decoration:none;color:#fff;}
 
 html {
-  background:#fff;
+  background:#f0f0f0;
   font-family:Arial;
   font-size:15px;
 }
@@ -21,21 +21,22 @@ html {
 
 table {
   text-align:center;
-  color:#323232;
 }
 
 tr {
 
 }
 
-td {
-  padding:5px;
-  background:#fff;
-  border:1px solid #323232;
-}
-
 th {
   padding:5px;
-  background:#fff;
+  background:#024769;
   border:1px solid #323232;
+  color:#fff;
+}
+
+td {
+  padding:5px;
+  background:#95CBE9;
+  border:1px solid #323232;
+  color:#000;
 }
