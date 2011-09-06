@@ -1,49 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Administration{% endblock %}</title>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>{% block title %}Administration{% endblock %}</title>
 
-        <!--{% block css %}
-            <link href="{{ asset('/bundles/msicmscore/css/bootstrap-1.1.0.min.css') }}" media="screen" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('/bundles/msicmscore/css/style2.css') }}" media="screen" type="text/css" rel="stylesheet" />
-        {% endblock %}-->
+    {% block css %}
+        <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/style.css') }}" media="all" type="text/css" rel="stylesheet" />
+    {% endblock %}
 
-        {% block top_js %}
-          <script src="{{ asset('/bundles/msicmspage/js/jquery.js') }}"></script>
-          <script src="{{ asset('/bundles/msicmspage/js/tablesorter.js') }}"></script>
-          <script src="{{ asset('/bundles/msicmspage/js/app.js') }}"></script>
+    {% block top_js %}
+      <script src="{{ asset('/bundles/msicontent/js/jquery.js') }}"></script>
+      <script src="{{ asset('/bundles/msicontent/js/tablesorter.js') }}"></script>
+      <script src="{{ asset('/bundles/msicontent/js/app.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+  <div id="container">
+  
+  <div id="header">
+    
+  </div>
+
+  {% block top_navigation %}
+    <a href="{{ path('page') }}">Page</a>
+  {% endblock %}
+
+  <div class="container">
+    <div id="content" class="container_12">
+        {% block content %}
         {% endblock %}
-    </head>
-    <body>
-      
-      <div class="topbar">
-        <div class="fill">
-          <div class="container">
-              {% block top_navigation %}
-                <a href="{{ path('page') }}">Page</a>
-              {% endblock %}
-          </div>
-        </div>  
-      </div>
-      
-      <div id="header">
-        <h1 class="container">Page</h1>
-      </div>
-      
-      <div class="container">
-        <div id="content" class="container_12">
-            {% block content %}
-            {% endblock %}
-        </div>
-        
-        <div id="footer" class="container_12">
-            {% block footer %}
-            {% endblock %}
-        </div>
-      </div>
-      
-      {% block bottom_js %}
-      {% endblock %}
-    </body>
+    </div>
+    
+    <div id="footer" class="container_12">
+        {% block footer %}
+        {% endblock %}
+    </div>
+  </div>
+  </div>
+  {% block bottom_js %}
+  {% endblock %}
+</body>
 </html>

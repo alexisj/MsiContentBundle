@@ -79,11 +79,11 @@
           <td class="text-left">{{ row.title }}</td>
           <td>
             {% if row.status %}
-              <img src="{{ asset('bundles/msicmscore/images/fatcow/bullet_green.png') }}" alt="bullet green" />
-              <span class="no-display">1</span>
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/small/bullet_green.png') }}" alt="bullet green" />
+              <span class="hidden">1</span>
             {% else %}
-              <img src="{{ asset('bundles/msicmscore/images/fatcow/bullet_red.png') }}" alt="bullet red" />
-              <span class="no-display">0</span>
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/small/bullet_red.png') }}" alt="bullet red" />
+              <span class="hidden">0</span>
             {% endif %}
           </td>
           <td>{{ row.pageCategory.name }}</td>
