@@ -1,0 +1,9 @@
+{% extends 'MsiContentBundle::skeleton.html.twig' %}
+{% block content %}
+  <a class="right btn" href="{{ path('page') }}">Back</a>
+  <h2>Edit Page</h2>
+  
+  <form action="{{ path('page_update', {'id': page.id}) }}" method="post" {{ form_enctype(form) }}>
+    {% include 'MsiContentBundle:Page:admin/form.html.twig' %}
+  </form>
+{% endblock %}

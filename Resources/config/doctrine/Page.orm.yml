@@ -1,0 +1,56 @@
+Msi\ContentBundle\Entity\Page:
+  type: entity
+  table: page
+  repositoryClass: Msi\ContentBundle\Entity\PageRepository
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    layout_id:
+      type: integer
+    author_id:
+      type: integer
+    page_category_id:
+      type: integer
+    title:
+      type: string
+      gedmo:
+        sluggable:
+          slugField: 'slug'
+    body:
+      type: text
+    unique_title:
+      type: string
+    slug:
+      type: string
+      gedmo:
+        slug:
+          separator: -
+    home:
+      type: boolean
+    status:
+      type: boolean
+    created:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updated:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  lifecycleCallbacks: {  }
+  manyToOne:
+    pageCategory:
+      targetEntity: PageCategory
+      joinColumn:
+        name: page_category_id
+        referencedColumnName: id
+    layout:
+      targetEntity: Layout
+      joinColumn:
+        name: layout_id
+        referencedColumnName: id

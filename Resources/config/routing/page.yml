@@ -1,0 +1,23 @@
+page:
+  pattern:  /
+  defaults: { _controller: MsiContentBundle:admin\Page:index }
+
+page_new:
+  pattern:  /new
+  defaults: { _controller: MsiContentBundle:admin\Page:new }
+
+page_create:
+  pattern:  /create
+  defaults: { _controller: MsiContentBundle:admin\Page:create }
+    
+page_edit:
+  pattern:  /{id}/edit/
+  defaults: { _controller: MsiContentBundle:admin\Page:edit }
+  requirements:
+    id: \d+
+
+page_update:
+  pattern:  /{id}/update/
+  defaults: { _controller: MsiContentBundle:admin\Page:update }
+  requirements:
+    id: \d+

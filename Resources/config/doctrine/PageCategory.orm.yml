@@ -1,0 +1,24 @@
+Msi\ContentBundle\Entity\PageCategory:
+  type: entity
+  table: page_category
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+    status:
+      type: boolean
+    created:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updated:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  lifecycleCallbacks: {  }

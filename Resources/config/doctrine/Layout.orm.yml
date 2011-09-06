@@ -1,0 +1,12 @@
+Msi\ContentBundle\Entity\Layout:
+  type: entity
+  table: layout
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+  lifecycleCallbacks: {  }

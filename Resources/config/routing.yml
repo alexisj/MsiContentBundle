@@ -1,0 +1,11 @@
+MsiContentBundle_page:
+    resource: "@MsiContentBundle/Resources/config/routing/page.yml"
+    prefix:   /admin/page
+
+homepage:
+  pattern: /
+  defaults: { _controller: MsiContentBundle:Page:index }
+    
+static:
+  pattern: /{slug}/
+  defaults: { _controller: MsiContentBundle:Page:show }

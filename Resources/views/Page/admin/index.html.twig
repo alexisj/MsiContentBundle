@@ -1,0 +1,103 @@
+{% extends 'MsiContentBundle::skeleton.html.twig' %}
+{% block content %}
+  
+  {% if app.session.hasFlash('notice') %}
+    <div class="alert-message success">
+      <a class="close" href="{{ path('page') }}">×</a>
+      <p>
+        <strong>Well done!</strong>
+        {{ app.session.flash('notice') }}
+      </p>
+    </div>
+  {% endif %}
+  
+  <form action="" method="POST">
+    <fieldset>
+      <div class="left">
+        <label>Display: </label>
+        <div class="input">
+          <select class="medium" onchange="this.form.submit()" name="limit">
+            <option {% if session.get('limit') == -1 %} selected="selected" {% endif %} value="-1">All</option>
+            <option {% if session.get('limit') == 5 %} selected="selected" {% endif %} value="5">5</option>
+            <option {% if session.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
+            <option {% if session.get('limit') == 15 %} selected="selected" {% endif %} value="15">15</option>
+            <option {% if session.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
+            <option {% if session.get('limit') == 25 %} selected="selected" {% endif %} value="25">25</option>
+            <option {% if session.get('limit') == 30 %} selected="selected" {% endif %} value="30">30</option>
+            <option {% if session.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
+            <option {% if session.get('limit') == 100 %} selected="selected" {% endif %} value="100">100</option>
+          </select>
+        </div>
+      </div>
+      <div class="left">
+        <label>Status: </label>
+        <div class="input">
+          <select class="medium" onchange="this.form.submit()" name="filters[status]">
+            <option {% if session.get('filters').status == -1 %} selected="selected" {% endif %} value="-1">All</option>
+            <option {% if session.get('filters').status == 1 %} selected="selected" {% endif %} value="1">Published</option>
+            <option {% if session.get('filters').status == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
+          </select>
+        </div>
+      </div>
+      <div class="left">
+        <label>Category: </label>
+        <div class="input">
+          <select class="medium" onchange="this.form.submit()" name="filters[page_category_id]">
+            <option {% if session.get('filters').page_category_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
+            {% for row in pageCategories %}
+            <option {% if session.get('filters').page_category_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      
+    </fieldset>
+  </form>
+  
+  <script >
+    $(function() {
+      $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
+    });
+  </script>
+  
+  <table id="my-table" class="zebra-striped">
+    <thead>
+      <tr>
+        <th class="blue header">ID</th>
+        <th class="blue header">Title</th>
+        <th class="blue header">Status</th>
+        <th class="blue header">Category</th>
+        <th class="blue header">Created by</th>
+        <th class="blue header">Date</th>
+        <th class="red">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in paginator %}
+        <tr>
+          <td>{{ row.id }}</td>
+          <td class="text-left">{{ row.title }}</td>
+          <td>
+            {% if row.status %}
+              <img src="{{ asset('bundles/msicmscore/images/fatcow/bullet_green.png') }}" alt="bullet green" />
+              <span class="no-display">1</span>
+            {% else %}
+              <img src="{{ asset('bundles/msicmscore/images/fatcow/bullet_red.png') }}" alt="bullet red" />
+              <span class="no-display">0</span>
+            {% endif %}
+          </td>
+          <td>{{ row.pageCategory.name }}</td>
+          <td>{{ row.authorId }}</td>
+          <td>{{ row.updated|date('d-m-Y') }}</td>
+          <td>
+            <a class="btn primary" href="{{ path('page_edit', { 'id': row.id }) }}">Edit</a>
+            <a class="btn primary" href="{{ path('page_new') }}">New</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {{ paginator|paginate }}
+  
+{% endblock %}

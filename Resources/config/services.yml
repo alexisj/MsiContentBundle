@@ -1,0 +1,7 @@
+parameters:
+#    msi_cms_page.example.class: Msi\ContentBundle\Example
+
+services:
+#    msi_cms_page.example:
+#        class: %msi_cms_page.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
