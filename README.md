@@ -6,4 +6,4 @@ new Msi\ContentBundle\MsiContentBundle(),
 
 MsiContentBundle:
 
-  resource: "@MsiContentBundle/Resources/config/routing.yml"
+    resource: "@MsiContentBundle/Resources/config/routing.yml"
