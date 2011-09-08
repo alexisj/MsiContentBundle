@@ -4,6 +4,5 @@ new Msi\ContentBundle\MsiContentBundle(),
 
 'Msi'  => __DIR__.'/../vendor/bundles',
 
-MsiContentBundle:
-
-    resource: "@MsiContentBundle/Resources/config/routing.yml"
+    MsiContentBundle:
+      resource: "@MsiContentBundle/Resources/config/routing.yml"
