@@ -1,0 +1,1 @@
+git submodule add -f git://github.com/alexisj/MsiContentBundle.git vendor/bundles/Msi/ContentBundle
