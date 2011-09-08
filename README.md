@@ -10,7 +10,7 @@ Register namespace :
 
     'Msi'  => __DIR__.'/../vendor/bundles',
 
-Add route :
+Add to routing :
 
     MsiContentBundle:
       resource: "@MsiContentBundle/Resources/config/routing.yml"
