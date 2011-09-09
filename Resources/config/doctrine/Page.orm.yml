@@ -10,7 +10,7 @@ Msi\ContentBundle\Entity\Page:
         strategy: AUTO
     layout_id:
       type: integer
-    author_id:
+    user_id:
       type: integer
     page_category_id:
       type: integer
