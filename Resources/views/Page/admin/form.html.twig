@@ -26,9 +26,9 @@
   </div>
 
   <div class="clearfix">
-    {{ form_label(form.author) }}
-    {{ form_errors(form.author) }}
-    <div class="input">{{ form_widget(form.author) }}</div>
+    {{ form_label(form.author_id) }}
+    {{ form_errors(form.author_id) }}
+    <div class="input">{{ form_widget(form.author_id) }}</div>
   </div>
 
   <div class="clearfix">
@@ -46,13 +46,7 @@
   <div class="clearfix">
     {{ form_label(form.unique_title) }}
     {{ form_errors(form.unique_title) }}
-   <div class="input"> {{ form_widget(form.unique_title, {'attr': {'class': 'disabled', 'disabled': ''}}) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.slug) }}
-    {{ form_errors(form.slug) }}
-    <div class="input">{{ form_widget(form.slug) }}</div>
+   <div class="input"> {{ form_widget(form.unique_title) }}</div>
   </div>
 
   {{ form_rest(form) }}

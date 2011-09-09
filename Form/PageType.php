@@ -11,11 +11,10 @@ class PageType extends AbstractType
     {
         $builder
             ->add('layout')
-            ->add('author')
+            ->add('author_id')
             ->add('title')
             ->add('body')
             ->add('unique_title')
-            ->add('slug')
             ->add('home')
             ->add('status')
             ->add('pageCategory')

@@ -1,6 +1,6 @@
 {% extends 'MsiContentBundle::skeleton.html.twig' %}
 {% block content %}
-  
+  <a class="btn primary" href="{{ path('page_new') }}">New</a>
   {% if app.session.hasFlash('notice') %}
     <div class="alert-message success">
       <a class="close" href="{{ path('page') }}">×</a>
@@ -91,7 +91,6 @@
           <td>{{ row.updated|date('d-m-Y') }}</td>
           <td>
             <a class="btn primary" href="{{ path('page_edit', { 'id': row.id }) }}">Edit</a>
-            <a class="btn primary" href="{{ path('page_new') }}">New</a>
           </td>
         </tr>
       {% endfor %}
