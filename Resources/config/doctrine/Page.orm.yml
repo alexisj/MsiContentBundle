@@ -54,3 +54,8 @@ Msi\ContentBundle\Entity\Page:
       joinColumn:
         name: layout_id
         referencedColumnName: id
+    user:
+      targetEntity: Msi\UserBundle\Entity\User
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
