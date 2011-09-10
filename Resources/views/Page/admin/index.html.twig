@@ -50,7 +50,6 @@
           </select>
         </div>
       </div>
-      
     </fieldset>
   </form>
   
@@ -60,16 +59,16 @@
     });
   </script>
   
-  <table id="my-table" class="zebra-striped">
+  <table id="my-table">
     <thead>
       <tr>
-        <th class="blue header">ID</th>
-        <th class="blue header">Title</th>
-        <th class="blue header">Status</th>
-        <th class="blue header">Category</th>
-        <th class="blue header">Created by</th>
-        <th class="blue header">Date</th>
-        <th class="red">Action</th>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Category</th>
+        <th>Created by</th>
+        <th>Date</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -87,7 +86,7 @@
             {% endif %}
           </td>
           <td>{{ row.pageCategory.name }}</td>
-          <td>{{ row.authorId }}</td>
+          <td>{{ row.user.username }}</td>
           <td>{{ row.updated|date('d-m-Y') }}</td>
           <td>
             <a class="btn primary" href="{{ path('page_edit', { 'id': row.id }) }}">Edit</a>

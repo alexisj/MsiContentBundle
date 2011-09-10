@@ -16,7 +16,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
       $page->setLayout($manager->merge($this->getReference('layout')));
       $page->setHome(true);
       $page->setStatus(true);
-      $page->setAuthorId(1);
+      $page->setUser(1);
       $page->setUniqueTitle('home-fr');
 
       $manager->persist($page);

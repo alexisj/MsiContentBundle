@@ -18,3 +18,7 @@ Add to routing :
 
     MsiContentBundle:
       resource: "@MsiContentBundle/Resources/config/routing.yml"
+
+Install assets
+
+    app/console assets:install --symlink web
