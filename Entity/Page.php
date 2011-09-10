@@ -9,185 +9,31 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
+
     /**
      * @var integer $id
      */
     private $id;
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-    /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var boolean $published
-     */
-    private $published;
-
-    /**
-     * @var date $created
-     */
-    private $created;
-
-    /**
-     * @var datetime $updated
-     */
-    private $updated;
-
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set published
-     *
-     * @param boolean $published
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-    }
-
-    /**
-     * Get published
-     *
-     * @return boolean 
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    /**
-     * Set created
-     *
-     * @param date $created
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * Get created
-     *
-     * @return date 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set updated
-     *
-     * @param datetime $updated
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-    }
-
-    /**
-     * Get updated
-     *
-     * @return datetime 
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-    /**
-     * @var boolean $home
-     */
-    private $home;
-
-
-    /**
-     * Set home
-     *
-     * @param boolean $home
-     */
-    public function setHome($home)
-    {
-        $this->home = $home;
-    }
-
-    /**
-     * Get home
-     *
-     * @return boolean 
-     */
-    public function getHome()
-    {
-        return $this->home;
-    }
     /**
      * @var integer $layout_id
      */
     private $layout_id;
 
     /**
-     * @var string $author
+     * @var integer $user_id
      */
-    private $author;
+    private $user_id;
 
     /**
      * @var integer $page_category_id
      */
     private $page_category_id;
+
+    /**
+     * @var string $title
+     */
+    private $title;
 
     /**
      * @var text $body
@@ -199,6 +45,56 @@ class Page
      */
     private $unique_title;
 
+    /**
+     * @var string $slug
+     */
+    private $slug;
+
+    /**
+     * @var boolean $home
+     */
+    private $home;
+
+    /**
+     * @var boolean $status
+     */
+    private $status;
+
+    /**
+     * @var datetime $created
+     */
+    private $created;
+
+    /**
+     * @var datetime $updated
+     */
+    private $updated;
+
+    /**
+     * @var Msi\ContentBundle\Entity\PageCategory
+     */
+    private $pageCategory;
+
+    /**
+     * @var Msi\ContentBundle\Entity\Layout
+     */
+    private $layout;
+
+    /**
+     * @var Msi\UserBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set layout_id
@@ -221,23 +117,23 @@ class Page
     }
 
     /**
-     * Set author
+     * Set user_id
      *
-     * @param string $author
+     * @param integer $userId
      */
-    public function setAuthor($author)
+    public function setUserId($userId)
     {
-        $this->author = $author;
+        $this->user_id = $userId;
     }
 
     /**
-     * Get author
+     * Get user_id
      *
-     * @return string 
+     * @return integer 
      */
-    public function getAuthor()
+    public function getUserId()
     {
-        return $this->author;
+        return $this->user_id;
     }
 
     /**
@@ -258,6 +154,26 @@ class Page
     public function getPageCategoryId()
     {
         return $this->page_category_id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -299,11 +215,46 @@ class Page
     {
         return $this->unique_title;
     }
-    /**
-     * @var boolean $status
-     */
-    private $status;
 
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set home
+     *
+     * @param boolean $home
+     */
+    public function setHome($home)
+    {
+        $this->home = $home;
+    }
+
+    /**
+     * Get home
+     *
+     * @return boolean 
+     */
+    public function getHome()
+    {
+        return $this->home;
+    }
 
     /**
      * Set status
@@ -324,11 +275,46 @@ class Page
     {
         return $this->status;
     }
-    /**
-     * @var Msi\ContentBundle\Entity\PageCategory
-     */
-    private $pageCategory;
 
+    /**
+     * Set created
+     *
+     * @param datetime $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Get created
+     *
+     * @return datetime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param datetime $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return datetime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 
     /**
      * Set pageCategory
@@ -349,36 +335,6 @@ class Page
     {
         return $this->pageCategory;
     }
-    /**
-     * @var integer $author_id
-     */
-    private $author_id;
-
-
-    /**
-     * Set author_id
-     *
-     * @param integer $authorId
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->author_id = $authorId;
-    }
-
-    /**
-     * Get author_id
-     *
-     * @return integer 
-     */
-    public function getAuthorId()
-    {
-        return $this->author_id;
-    }
-    /**
-     * @var Msi\ContentBundle\Entity\Layout
-     */
-    private $layout;
-
 
     /**
      * Set layout
@@ -398,5 +354,25 @@ class Page
     public function getLayout()
     {
         return $this->layout;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Msi\UserBundle\Entity\User $user
+     */
+    public function setUser(\Msi\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Msi\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
