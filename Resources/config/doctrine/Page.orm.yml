@@ -28,9 +28,9 @@ Msi\ContentBundle\Entity\Page:
       gedmo:
         slug:
           separator: -
-    home:
+    homepage:
       type: boolean
-    status:
+    published:
       type: boolean
     created:
       type: datetime

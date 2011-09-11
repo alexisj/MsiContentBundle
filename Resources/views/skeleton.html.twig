@@ -5,8 +5,12 @@
     <title>{% block title %}Administration{% endblock %}</title>
 
     {% block css %}
-        <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/theme.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/style.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/theme4.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <!--[if IE]>
+          <link href="{{ asset('/bundles/msicontent/css/ie-sucks.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <![endif]-->
     {% endblock %}
 
     {% block top_js %}
@@ -17,26 +21,42 @@
 </head>
 <body>
   <div id="container">
-  
-  <div id="header">
-    
-  </div>
-
-  {% block top_navigation %}
-    <a href="{{ path('page') }}">Page</a>
-  {% endblock %}
-
-  <div class="container">
-    <div id="content" class="container_12">
-        {% block content %}
-        {% endblock %}
+    <div id="header">
+      <h2>Msi Cms</h2>
+      {% block topmenu %}
+        <div id="topmenu">
+          <ul>
+            <li><a href="{{ path('page') }}">Page</a></li>
+          </ul>
+        </div>
+      {% endblock %}
+      <div id="top-panel">
+      <div id="panel">
+      <ul>
+      {% block toppanel %}
+        
+      {% endblock %}
+      </ul>
+      </div>
+      </div>
     </div>
-    
-    <div id="footer" class="container_12">
+
+    <div class="wrapper">
+      <div id="content">
+          {% block content %}
+          {% endblock %}
+      </div>
+      <div id="sidebar">
+        {% block sidebar %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div id="footer">
         {% block footer %}
+          &copy; 2011 Groupe MSI
         {% endblock %}
     </div>
-  </div>
   </div>
   {% block bottom_js %}
   {% endblock %}

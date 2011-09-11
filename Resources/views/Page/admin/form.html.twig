@@ -1,53 +1,7 @@
 <fieldset>
   {{ form_errors(form) }}
 
-  <div class="clearfix">
-    {{ form_label(form.home) }}
-    {{ form_errors(form.home) }}
-    <div class="input">{{ form_widget(form.home) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.status) }}
-    {{ form_errors(form.status) }}
-    <div class="input">{{ form_widget(form.status) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.title) }}
-    {{ form_errors(form.title) }}
-    <div class="input">{{ form_widget(form.title) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.body) }}
-    {{ form_errors(form.body) }}
-    <div class="input">{{ form_widget(form.body, {'attr':{'class':'xxlarge'}}) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.user) }}
-    {{ form_errors(form.user) }}
-    <div class="input">{{ form_widget(form.user) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.layout) }}
-    {{ form_errors(form.layout) }}
-    <div class="input">{{ form_widget(form.layout) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.pageCategory, 'Page category') }}
-    {{ form_errors(form.pageCategory) }}
-    <div class="input">{{ form_widget(form.pageCategory) }}</div>
-  </div>
-
-  <div class="clearfix">
-    {{ form_label(form.unique_title) }}
-    {{ form_errors(form.unique_title) }}
-   <div class="input"> {{ form_widget(form.unique_title) }}</div>
-  </div>
+  {% form_theme form 'MsiContentBundle:Form:field.html.twig' %}
 
   {{ form_rest(form) }}
 

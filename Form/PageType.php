@@ -11,18 +11,24 @@ class PageType extends AbstractType
     {
         $builder
             ->add('layout')
-            ->add('user')
             ->add('title')
             ->add('body')
             ->add('unique_title')
-            ->add('home')
-            ->add('status')
+            ->add('homepage', null, array('required' => false))
+            ->add('published', null, array('required' => false))
             ->add('pageCategory')
         ;
     }
 
     public function getName()
     {
-        return 'msi_cms_bundle_ContentBundle_pagetype';
+        return 'page';
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Msi\ContentBundle\Entity\Page',
+        );
     }
 }

@@ -23,7 +23,7 @@ class PageController extends Controller
     if (!$session->has('limit')) $session->set('limit', 15);
     if (!$session->has('filters')) $session->set('filters', array(
       'page_category_id' => -1,
-      'status' => -1,
+      'published' => -1,
     ));
     
     $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('filters'));
@@ -37,11 +37,13 @@ class PageController extends Controller
     $paginator->setPageRange(10);
     
     $pageCategories = $this->getDoctrine()->getRepository('MsiContentBundle:PageCategory')->findAll();
-    
+    $users = $this->getDoctrine()->getRepository('MsiUserBundle:User')->findAll();
+
     return $this->render('MsiContentBundle:Page:admin/index.html.twig', array(
       'session' => $session,
       'paginator' => $paginator,
-      'pageCategories' => $pageCategories
+      'pageCategories' => $pageCategories,
+      'users' => $users,
     ));
   }
 
@@ -56,9 +58,11 @@ class PageController extends Controller
   {
     $em = $this->getDoctrine()->getEntityManager();
     $page = new Page;
+    
     $form = $this->createForm(new PageType(), $page);
     
     $form->bindRequest($this->getRequest());
+    $page->setUser($this->get('security.context')->getToken()->getUser());
     
     if ($form->isValid()) {
       $em->persist($page);

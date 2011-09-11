@@ -51,14 +51,14 @@ class Page
     private $slug;
 
     /**
-     * @var boolean $home
+     * @var boolean $homepage
      */
-    private $home;
+    private $homepage;
 
     /**
-     * @var boolean $status
+     * @var boolean $published
      */
-    private $status;
+    private $published;
 
     /**
      * @var datetime $created
@@ -237,43 +237,43 @@ class Page
     }
 
     /**
-     * Set home
+     * Set homepage
      *
-     * @param boolean $home
+     * @param boolean $homepage
      */
-    public function setHome($home)
+    public function setHomepage($homepage)
     {
-        $this->home = $home;
+        $this->homepage = $homepage;
     }
 
     /**
-     * Get home
+     * Get homepage
      *
      * @return boolean 
      */
-    public function getHome()
+    public function getHomepage()
     {
-        return $this->home;
+        return $this->homepage;
     }
 
     /**
-     * Set status
+     * Set published
      *
-     * @param boolean $status
+     * @param boolean $published
      */
-    public function setStatus($status)
+    public function setPublished($published)
     {
-        $this->status = $status;
+        $this->published = $published;
     }
 
     /**
-     * Get status
+     * Get published
      *
      * @return boolean 
      */
-    public function getStatus()
+    public function getPublished()
     {
-        return $this->status;
+        return $this->published;
     }
 
     /**
