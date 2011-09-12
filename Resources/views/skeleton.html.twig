@@ -34,9 +34,7 @@
         </ul>
         <ul class="top-panel grid_12">
             {% block toppanel %}
-                <li><a class="page" href="{{ path('page') }}">Page</a></li>
-                <li><a class="page" href="{{ path('page') }}">Category</a></li>
-                <li><a class="page" href="{{ path('page') }}">Layout</a></li>
+                <li><a title="Log out" href="{{ path('page') }}"><img src="{{ asset('/bundles/msicontent/images/logout.png') }}" alt="log out" /></a></li>
             {% endblock %}
         </ul>
 

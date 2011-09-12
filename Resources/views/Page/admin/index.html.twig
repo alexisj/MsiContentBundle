@@ -5,9 +5,9 @@
     <div id="toolbar">
         <h1>Pages</h1>
         <ul class="panel text-right">
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_add.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_edit.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_delete.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_add.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_edit.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_delete.png') }}" alt="add" /></a></li>
             <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/help.png') }}" alt="add" /></a></li>
         </ul>
     </div>
@@ -96,10 +96,10 @@
           <td class="text-left">{{ row.title }}</td>
           <td>
             {% if row.published %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/big/bullet_green.png') }}" alt="bullet_green" />
+              <img src="{{ asset('/bundles/msicontent/images/published.png') }}" alt="bullet_green" />
               <span class="hidden">1</span>
             {% else %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/big/bullet_red.png') }}" alt="bullet_red" />
+              <img src="{{ asset('/bundles/msicontent/images/unpublished.png') }}" alt="bullet_red" />
               <span class="hidden">0</span>
             {% endif %}
           </td>
