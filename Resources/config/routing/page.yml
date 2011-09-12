@@ -3,11 +3,11 @@ page:
   defaults: { _controller: MsiContentBundle:admin\Page:index }
 
 page_new:
-  pattern:  /new
+  pattern:  /new/
   defaults: { _controller: MsiContentBundle:admin\Page:new }
 
 page_create:
-  pattern:  /create
+  pattern:  /create/
   defaults: { _controller: MsiContentBundle:admin\Page:create }
     
 page_edit:
@@ -21,3 +21,7 @@ page_update:
   defaults: { _controller: MsiContentBundle:admin\Page:update }
   requirements:
     id: \d+
+
+page_reset_filters:
+  pattern:  /reset/filters/
+  defaults: { _controller: MsiContentBundle:admin\Page:resetFilters }

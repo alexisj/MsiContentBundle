@@ -5,7 +5,8 @@
     <title>{% block title %}Administration{% endblock %}</title>
 
     {% block css %}
-        <link href="{{ asset('/bundles/msicontent/css/theme.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/960.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/style.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/theme4.css') }}" media="all" type="text/css" rel="stylesheet" />
         <!--[if IE]>
@@ -20,44 +21,47 @@
     {% endblock %}
 </head>
 <body>
-  <div id="container">
-    <div id="header">
-      <h2>Msi Cms</h2>
-      {% block topmenu %}
-        <div id="topmenu">
-          <ul>
-            <li><a href="{{ path('page') }}">Page</a></li>
-          </ul>
+    <div class="container_12">
+
+        <div id="header" class="grid_12">
+            <h2>Msi Cms</h2>
         </div>
-      {% endblock %}
-      <div id="top-panel">
-      <div id="panel">
-      <ul>
-      {% block toppanel %}
-        
-      {% endblock %}
-      </ul>
-      </div>
-      </div>
-    </div>
+        <ul id="menu" class="grid_12">
+            {% block topmenu %}
+                <li><a href="{{ path('page') }}">Users</a></li>
+                <li><a href="{{ path('page') }}">Content</a></li>             
+            {% endblock %}
+        </ul>
+        <ul class="top-panel grid_12">
+            {% block toppanel %}
+                <li><a class="page" href="{{ path('page') }}">Page</a></li>
+                <li><a class="page" href="{{ path('page') }}">Category</a></li>
+                <li><a class="page" href="{{ path('page') }}">Layout</a></li>
+            {% endblock %}
+        </ul>
 
-    <div class="wrapper">
-      <div id="content">
-          {% block content %}
-          {% endblock %}
-      </div>
-      <div id="sidebar">
-        {% block sidebar %}
-        {% endblock %}
-      </div>
-    </div>
+        <div id="content" class="grid_9">
+            <div class="box">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
 
-    <div id="footer">
-        {% block footer %}
-          &copy; 2011 Groupe MSI
-        {% endblock %}
+        <div id="sidebar" class="grid_3">
+            <div class="box">
+                {% block sidebar %}
+                    ff
+                {% endblock %}
+            </div>
+        </div>
+
+        <div id="footer" class="grid_12 box">
+            {% block footer %}
+                &copy; 2011 Groupe MSI
+            {% endblock %}
+        </div>
+
     </div>
-  </div>
   {% block bottom_js %}
   {% endblock %}
 </body>

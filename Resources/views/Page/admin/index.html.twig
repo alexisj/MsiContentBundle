@@ -1,22 +1,26 @@
 {% extends 'MsiContentBundle::skeleton.html.twig' %}
 
-{% block toppanel %}
-  <li><a class="add" href="{{ path('page_new') }}">New page</a></li>
-{% endblock %}
-
 {% block content %}
+
+    <div id="toolbar">
+        <h1>Pages</h1>
+        <ul class="panel text-right">
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_add.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_edit.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/page_delete.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/help.png') }}" alt="add" /></a></li>
+        </ul>
+    </div>
 
   {% if app.session.hasFlash('notice') %}
     <div class="alert-message success">
-      <a class="close" href="{{ path('page') }}">×</a>
       <p>
         <strong>Well done!</strong>
         {{ app.session.flash('notice') }}
       </p>
     </div>
   {% endif %}
-  <div class="box">
-  <h3>Filters</h3>
+
   <form class="form filter" action="" method="POST">
     <fieldset>
         <div class="field">
@@ -45,6 +49,9 @@
             {% endfor %}
             </select>
         </div>
+        <div class="field">
+          <a href="{{ path('page_reset_filters') }}">Reset</a>
+        </div>
         <div class="field right">
             <label>Display: </label>
             <select class="medium" onchange="this.form.submit()" name="limit">
@@ -61,52 +68,49 @@
         </div>
     </fieldset>
   </form>
-  </div>
 
   <script >
     $(function() {
       $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
     });
   </script>
-  <div class="box">
-  <h3>Pages</h3>
+
+  <form action="" method="post" style="margin-bottom:0px;">
   <table id="my-table">
     <thead>
       <tr>
+        <th><input type="checkbox" value="3" name=""></th>
         <th>ID</th>
         <th>Title</th>
-        <th>Published</th>
+        <th>Status</th>
         <th>Category</th>
         <th>Created by</th>
         <th>Date</th>
-        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {% for row in paginator %}
         <tr>
+          <td><input type="checkbox" value="3" name=""></td>
           <td>{{ row.id }}</td>
           <td class="text-left">{{ row.title }}</td>
           <td>
             {% if row.published %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/small/bullet_blue.png') }}" alt="bullet_blue" />
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/big/bullet_green.png') }}" alt="bullet_green" />
               <span class="hidden">1</span>
             {% else %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/small/bullet_red.png') }}" alt="bullet_red" />
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/big/bullet_red.png') }}" alt="bullet_red" />
               <span class="hidden">0</span>
             {% endif %}
           </td>
           <td>{{ row.pageCategory.name }}</td>
           <td>{{ row.user.username }}</td>
           <td>{{ row.updated|date('d-m-Y') }}</td>
-          <td>
-            <a href="{{ path('page_edit', { 'id': row.id }) }}">Edit</a>
-          </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
-      {{ paginator|paginate }}
-  </div>
-  
+  </form>
+  {{ paginator|paginate }}
+
 {% endblock %}

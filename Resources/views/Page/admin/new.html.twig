@@ -1,9 +1,12 @@
 {% extends 'MsiContentBundle::skeleton.html.twig' %}
 {% block content %}
   <a class="right btn" href="{{ path('page') }}">Back</a>
-  <h2>New Page</h2>
-  
-  <form action="{{ path('page_create') }}" method="post" {{ form_enctype(form) }}>
+  <div class="box">
+  <h3>New page</h3>
+  <form class="form" action="{{ path('page_create') }}" method="post" {{ form_enctype(form) }}>
+    <fieldset>
     {% include 'MsiContentBundle:Page:admin/form.html.twig' %}
+    </fieldset>
   </form>
+  </div>
 {% endblock %}

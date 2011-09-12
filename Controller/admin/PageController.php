@@ -24,6 +24,7 @@ class PageController extends Controller
     if (!$session->has('filters')) $session->set('filters', array(
       'page_category_id' => -1,
       'published' => -1,
+      'user_id' => -1,
     ));
     
     $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('filters'));
@@ -102,6 +103,20 @@ class PageController extends Controller
       return $this->redirect($this->generateUrl('page'));
     } else {
       return $this->render('MsiContentBundle:Page:admin/edit.html.twig', array('page' => $page, 'form' => $form->createView()));
-    }  
+    }
+  }
+  
+  public function resetFiltersAction()
+  {
+    $session = $this->get('session');
+    // Default filters.
+    $session->set('limit', 15);
+    $session->set('filters', array(
+      'page_category_id' => -1,
+      'published' => -1,
+      'user_id' => -1,
+    ));
+
+    return $this->redirect($this->generateUrl('page'));
   }
 }
