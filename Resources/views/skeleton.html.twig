@@ -5,10 +5,9 @@
     <title>{% block title %}Administration{% endblock %}</title>
 
     {% block css %}
-        <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/960.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/style.css') }}" media="all" type="text/css" rel="stylesheet" />
-        <link href="{{ asset('/bundles/msicontent/css/theme4.css') }}" media="all" type="text/css" rel="stylesheet" />
         <!--[if IE]>
           <link href="{{ asset('/bundles/msicontent/css/ie-sucks.css') }}" media="all" type="text/css" rel="stylesheet" />
         <![endif]-->
@@ -21,45 +20,48 @@
     {% endblock %}
 </head>
 <body>
-    <div class="container_12">
 
-        <div id="header" class="grid_12">
-            <h2>Msi Cms</h2>
-        </div>
-        <ul id="menu" class="grid_12">
-            {% block topmenu %}
-                <li><a href="{{ path('page') }}">Users</a></li>
-                <li><a href="{{ path('page') }}">Content</a></li>             
-            {% endblock %}
-        </ul>
-        <ul class="top-panel grid_12">
-            {% block toppanel %}
-                <li><a title="Log out" href="{{ path('page') }}"><img src="{{ asset('/bundles/msicontent/images/logout.png') }}" alt="log out" /></a></li>
-            {% endblock %}
-        </ul>
-
-        <div id="content" class="grid_9">
-            <div class="box">
-                {% block content %}
-                {% endblock %}
+    <div id="header">
+        <div class="container_12">
+            <div class="grid_12">
+                <h2 style="background:#212121;float:left;padding:10px;margin:10px;">SecurFinance</h2>
+            </div>
+            <div class="grid_12">
+                <ul id="menu" class="box">
+                    {% block menu %}
+                        <li><a href="{{ path('page') }}">Users</a></li>
+                        <li><a href="{{ path('page') }}">Content</a></li>             
+                    {% endblock %}
+                </ul>
             </div>
         </div>
-
-        <div id="sidebar" class="grid_3">
-            <div class="box">
-                {% block sidebar %}
-                    ff
-                {% endblock %}
-            </div>
-        </div>
-
-        <div id="footer" class="grid_12 box">
-            {% block footer %}
-                &copy; 2011 Groupe MSI
-            {% endblock %}
-        </div>
-
     </div>
+
+    <div id="content">
+        <div class="container_12">
+            <div class="grid_12">
+                <div class="box fat">
+                    {% block content %}
+                    {% endblock %}
+                    {% block sidebar %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="container_12">
+            <div class="grid_12">
+                <div class="box fat">
+                    {% block footer %}
+                        <p class="box">&copy; 2011 Groupe MSI</p>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
   {% block bottom_js %}
   {% endblock %}
 </body>

@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <div id="toolbar">
+    <div class="page-header">
         <h1>Pages</h1>
-        <ul class="panel text-right">
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_add.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_edit.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/page_delete.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/big/help.png') }}" alt="add" /></a></li>
+        <ul class="unstyled">
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_add.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_edit.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_delete.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/help.png') }}" alt="add" /></a></li>
         </ul>
     </div>
 
@@ -24,7 +24,7 @@
   <form class="form filter" action="" method="POST">
     <fieldset>
         <div class="field">
-            <label class="first">Published: </label>
+            <label>Status: </label>
             <select class="medium" onchange="this.form.submit()" name="filters[published]">
                 <option {% if session.get('filters').published == -1 %} selected="selected" {% endif %} value="-1">All</option>
                 <option {% if session.get('filters').published == 1 %} selected="selected" {% endif %} value="1">Published</option>
@@ -50,24 +50,8 @@
             </select>
         </div>
         <div class="field">
-          <a href="{{ path('page_reset_filters') }}">Reset</a>
+          <a class="reset" href="{{ path('page_reset_filters') }}">Reset</a>
         </div>
-        <div class="field right">
-            <label>Display: </label>
-            <select class="medium" onchange="this.form.submit()" name="limit">
-                <option {% if session.get('limit') == -1 %} selected="selected" {% endif %} value="-1">All</option>
-                <option {% if session.get('limit') == 5 %} selected="selected" {% endif %} value="5">5</option>
-                <option {% if session.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
-                <option {% if session.get('limit') == 15 %} selected="selected" {% endif %} value="15">15</option>
-                <option {% if session.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
-                <option {% if session.get('limit') == 25 %} selected="selected" {% endif %} value="25">25</option>
-                <option {% if session.get('limit') == 30 %} selected="selected" {% endif %} value="30">30</option>
-                <option {% if session.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
-                <option {% if session.get('limit') == 100 %} selected="selected" {% endif %} value="100">100</option>
-            </select>
-        </div>
-    </fieldset>
-  </form>
 
   <script >
     $(function() {
@@ -75,7 +59,6 @@
     });
   </script>
 
-  <form action="" method="post" style="margin-bottom:0px;">
   <table id="my-table">
     <thead>
       <tr>
@@ -96,10 +79,10 @@
           <td class="text-left">{{ row.title }}</td>
           <td>
             {% if row.published %}
-              <img src="{{ asset('/bundles/msicontent/images/published.png') }}" alt="bullet_green" />
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept.png') }}" alt="published" />
               <span class="hidden">1</span>
             {% else %}
-              <img src="{{ asset('/bundles/msicontent/images/unpublished.png') }}" alt="bullet_red" />
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
               <span class="hidden">0</span>
             {% endif %}
           </td>
@@ -110,6 +93,21 @@
       {% endfor %}
     </tbody>
   </table>
+          <div class="field">
+            <label>Display: </label>
+            <select class="medium" onchange="this.form.submit()" name="limit">
+                <option {% if session.get('limit') == -1 %} selected="selected" {% endif %} value="-1">All</option>
+                <option {% if session.get('limit') == 5 %} selected="selected" {% endif %} value="5">5</option>
+                <option {% if session.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
+                <option {% if session.get('limit') == 15 %} selected="selected" {% endif %} value="15">15</option>
+                <option {% if session.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
+                <option {% if session.get('limit') == 25 %} selected="selected" {% endif %} value="25">25</option>
+                <option {% if session.get('limit') == 30 %} selected="selected" {% endif %} value="30">30</option>
+                <option {% if session.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
+                <option {% if session.get('limit') == 100 %} selected="selected" {% endif %} value="100">100</option>
+            </select>
+        </div>
+      </fieldset>
   </form>
   {{ paginator|paginate }}
 

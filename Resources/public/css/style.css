@@ -1,16 +1,21 @@
 /*********************
     HTML Elements
 *********************/
+.box {
+    background-color: #eeeeee;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.1) inset;
+    padding:15px;
+}
 
 body {
     font-size: 12px;
     font-family: Arial, sans-serif;
-    background:url(../images/bg.png) repeat-x top #4a525a;
+    background:#4a525a;
     color: #323232;
 }
 
 a {
-    color:#4a525a;
+    color:#323232;
     text-decoration:none;
 }
 
@@ -28,7 +33,6 @@ h1 {
     font-size:32px;
     line-height:32px;
     font-style:italic;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
@@ -45,7 +49,8 @@ h3 {
 }
 
 #header {
-    padding:18px;
+    background:#606870;
+    margin-bottom:15px;
 }
 
 .top-panel {
@@ -96,15 +101,19 @@ h3 {
 }
 
 #footer {
-    margin-bottom:15px;
+    
 }
-
-.box {
-    background-color: #d9dbdc;
-    background-image: -moz-linear-gradient(center top , #f5f5f5, #d9dbdc);
-    background-repeat: repeat-x;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.1) inset;
-    padding:15px;
+.page-header {
+  margin-bottom:15px;
+}
+.page-header ul {
+  text-align:right;
+}
+.page-header ul li {
+  display:inline;
+}
+.page-header h1 {
+  float:left;
 }
 
 /*********************
@@ -114,16 +123,16 @@ h3 {
 table {
     border-collapse:collapse;
     width:100%;
-    line-height:31px;
+    margin:15px 0;
 }
 
 tbody tr:nth-child(2n+1) td {
-    
+    background:#dddddd;
 }
 
 td, th {
-    padding:0 5px;
-    border-bottom:1px solid #f5f5f5;
+    padding:5px;
+    border:1px solid #323232;
     text-align:center;
 }
 
@@ -131,11 +140,10 @@ th {
     background-color: #606870;
     color:#fff;
     font-weight:bold;
-    padding-top:2px;
 }
 
 td {
-    padding-top:2px;
+
 }
 
 /*********************
@@ -143,9 +151,39 @@ td {
 *********************/
 
 form {
-    margin-bottom:15px;
+    
 }
+select {
+  padding:3px;
+  border:none;
+}
+option {
 
+}
+label {
+  padding:6px;
+  display:block;
+  float:left;
+  background:#606870;
+  color:#eeeeee;
+}
+.field {
+    background:#fff;
+    border:1px solid #323232;
+    margin-right:10px;
+    float:left;
+}
+.field.last {
+    margin-right:0;
+}
+.reset {
+    display:block;
+    padding:6px;
+}
+.reset:hover {
+    background:#606870;
+    color:#fff;
+}
 /*********************
     Menus
 *********************/
@@ -160,9 +198,11 @@ form {
 
 #menu a, #menu a:visited {
     display:block;
-    padding:10px 20px;
+    text-align:center;
     text-decoration:none;
-    margin-right:5px;
+    margin:0 10px;
+    width:60px;
+    padding:10px 0;
 }
 
 #menu .current a, #menu .current a:hover, #menu .current a:visited {
@@ -215,6 +255,7 @@ form {
 .text-right {text-align:right !important;}
 .left {float:left !important;}
 .right {float:right !important;}
+.fat{border:1px solid #323232;}
 
 .alert-message {
   padding:5px;
@@ -233,42 +274,7 @@ form {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-form.filter {
-    padding:5px !important;
-    border-top:1px solid #fbfcfc;
-    border-left:1px solid #fbfcfc;
-    border-right:1px solid #cecfd0;
-    border-bottom:1px solid #cecfd0;
-}
 
-div.field {
-  padding:4px 0 2px;
-}
-
-.filter fieldset {
-  padding:2px 4px !important;
-  margin:0 !important;
-  border:none !important;
-}
-
-.filter .field {
-  float:left;
-}
-
-.filter select {
-  padding:0 !important;
-  margin:0 !important;
-}
-
-.filter label {
-  width:auto !important;
-  margin:0 !important;
-  padding:0 4px !important;
-}
-
-.filter label.first {
-  padding-left:0 !important;
-}
 
 /*********************
 	Pagination
