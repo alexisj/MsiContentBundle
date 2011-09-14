@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #323232;
     font-family: Georgia, Arial, sans-serif;
     font-weight:bold;
+    margin-bottom:15px;
 }
 
 h1 {
@@ -94,6 +95,8 @@ h3 {
 
 #content {
     margin-bottom:15px;
+    padding:15px 0;
+    background:#EEEEEE;
 }
 
 #sidebar {
@@ -101,7 +104,8 @@ h3 {
 }
 
 #footer {
-    
+  background:#EEEEEE;
+  padding:15px 0;
 }
 /*********************
     Toolbar
@@ -129,7 +133,7 @@ h3 {
 table {
     border-collapse:collapse;
     width:100%;
-    margin:15px 0;
+    margin-bottom:15px;
 }
 
 tbody tr:nth-child(2n+1) td {
@@ -155,12 +159,12 @@ td {
 /*********************
     Forms
 *********************/
-
 form {
     
 }
 label {
-
+  display:block;
+  margin-bottom:5px;
 }
 input[type="text"] {
   background:#fff;
@@ -179,6 +183,10 @@ textarea {
   padding:5px;
   font-family: Arial, sans-serif;
   font-size:12px;
+  width:210px;
+}
+form .field {
+  margin-bottom:15px;
 }
 .input.small {
   width: 130px;
@@ -199,6 +207,7 @@ form.filter label {
   float:left;
   background:#606870;
   color:#eeeeee;
+  margin-bottom:0px;
 }
 form.filter .field {
     background:#fff;
@@ -208,14 +217,6 @@ form.filter .field {
 }
 form.filter .field.last {
     margin-right:0;
-}
-form.filter .reset {
-    display:block;
-    padding:6px;
-}
-form.filter .reset:hover {
-    background:#606870;
-    color:#fff;
 }
 /*********************
     Menus
@@ -254,7 +255,6 @@ form.filter .reset:hover {
 .left {float:left !important;}
 .right {float:right !important;}
 .fat{border:1px solid #323232;}
-
 .alert-message {
   padding:5px;
   margin-bottom:10px;
@@ -263,17 +263,38 @@ form.filter .reset:hover {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
   color:#fff;
 }
-
-.alert-message.success {
-  background-color: #57A957;
-  background-image: -moz-linear-gradient(center top , #62C462, #57A957);
-  background-repeat: repeat-x;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+.btn.danger, .alert-message.danger, .btn.error, .alert-message.error {
+    background-color: #C43C35;
+    background-image: -moz-linear-gradient(center top , #EE5F5B, #C43C35);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-
-
-
+.btn.success, .alert-message.success {
+    background-color: #57A957;
+    background-image: -moz-linear-gradient(center top , #62C462, #57A957);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn.info, .alert-message.info {
+    background-color: #339BB9;
+    background-image: -moz-linear-gradient(center top , #5BC0DE, #339BB9);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn {
+  background:#fff;
+  padding:6px 18px;
+  display:block;
+  border:1px solid #323232;
+}
+.btn:hover {
+  background:#606870;
+  cursor:pointer;
+  color:#eeeeee;
+}
 /*********************
 	Pagination
 *********************/

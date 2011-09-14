@@ -2,65 +2,11 @@
 
 {% block content %}
     
-    <script>
-      function submitForm(batch_action)
-      {
-        document.getElementById('batch-action').value = batch_action;
-        document.getElementById('adminForm').submit();
-      }
-      function checkAll()
-      {
-        var adminForm = document.getElementById('adminForm');
-        for (var i = 0 ; adminForm.elements.length > i ; i++) {
-          if (adminForm.elements[i].checked == false) {
-            adminForm.elements[i].checked = true;
-          } else {
-            adminForm.elements[i].checked = false;
-          }
-        }
-      }
-    </script>
-    <div class="toolbar">
-      <ul>
-        <li><a href="{{ path('page_new') }}">
-          <span class="icon-32-add"></span>
-          New
-        </a></li>
+  {% include 'MsiContentBundle::toolbar.html.twig' %}
 
-        <li><a href="#" onclick="submitForm('edit')">
-          <span class="icon-32-pencil"></span>
-          Edit
-        </a></li>
+  <h1>Pages</h1>
 
-        <li><a href="#" onclick="submitForm('publish')">
-          <span class="icon-32-accept"></span>
-          Publish
-        </a></li>
-
-        <li><a href="#" onclick="submitForm('unpublish')">
-          <span class="icon-32-accept_grey"></span>
-          Unpublish
-        </a></li>
-
-        <li><a href="#" onclick="submitForm('delete')">
-          <span class="icon-32-delete"></span>
-          Delete
-        </a></li>
-      </ul>
-    </div>
-
-    <h1>Pages</h1>
-
-    <div class="clear"></div>
-
-  {% if app.session.hasFlash('notice') %}
-    <div class="alert-message success">
-      <p>
-        <strong>Well done!</strong>
-        {{ app.session.flash('notice') }}
-      </p>
-    </div>
-  {% endif %}
+  <div class="clear"></div>
 
   <form id="filterForm" class="filter" action="{{ path('page_filter') }}" method="POST">
     <fieldset>
@@ -90,9 +36,7 @@
             {% endfor %}
             </select>
         </div>
-        <div class="field">
-          <a class="reset" href="{{ path('page_reset_filters') }}">Reset</a>
-        </div>
+          <a class="btn left" href="{{ path('page_reset_filters') }}">Reset</a>
     </fieldset>
   </form>
 
@@ -101,11 +45,6 @@
 
       <input id="batch-action" type="hidden" name="batch_action" value="" />
 
-      <script >
-        $(function() {
-          $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
-        });
-      </script>
 
       <table id="my-table">
         <thead>
@@ -141,6 +80,10 @@
           {% endfor %}
         </tbody>
       </table>
+      </fieldset>
+    </form>
+    <form class="filter" action="{{ path('page_limit') }}" method="POST">
+      <fieldset>
           <div class="field">
             <label>Display: </label>
             <select id="selector_limit" class="medium" onchange="this.form.submit()" name="limit">

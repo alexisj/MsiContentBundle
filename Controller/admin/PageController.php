@@ -58,7 +58,7 @@ class PageController extends Controller
       $em->persist($entity);
       $em->flush();
       
-      $this->get('session')->setFlash('notice', 'Your changes were saved!');
+      $this->get('session')->setFlash('success', 'Your changes were saved!');
       
       return $this->redirect($this->generateUrl('page'));
     } else {
@@ -87,7 +87,7 @@ class PageController extends Controller
       $em->persist($entity);
       $em->flush();
       
-      $this->get('session')->setFlash('notice', 'Your changes were saved!');
+      $this->get('session')->setFlash('success', 'Your changes were saved!');
       
       return $this->redirect($this->generateUrl('page'));
     } else {
@@ -97,10 +97,9 @@ class PageController extends Controller
 
   public function batchAction()
   {
+    $session = $this->get('session');
     $request = $this->get('request')->request;
     $em = $this->getDoctrine()->getEntityManager();
-
-    $this->get('session')->set('limit', $request->get('limit'));
 
     $ids = $request->get('ids');
     $batch_action = $request->get('batch_action');
@@ -132,8 +131,9 @@ class PageController extends Controller
           $em->flush();
         }
       }
+    } else {
+      $session->setFlash('error', 'You must at least select one item.');
     }
-
     return $this->redirect($this->generateUrl('page'));
   }
   
@@ -159,5 +159,15 @@ class PageController extends Controller
       'status' => -1,
       'user_id' => -1,
     ));
+  }
+
+  public function setLimitAction()
+  {
+    $session = $this->get('session');
+    $request = $this->get('request')->request;
+
+    $session->set('limit', $request->get('limit'));
+
+    return $this->redirect($this->generateUrl('page'));
   }
 }

@@ -10,6 +10,10 @@ page_filter:
   pattern:  /filter
   defaults: { _controller: MsiContentBundle:admin\Page:setFilters }
 
+page_limit:
+  pattern:  /limit
+  defaults: { _controller: MsiContentBundle:admin\Page:setLimit }
+
 page_new:
   pattern:  /new/
   defaults: { _controller: MsiContentBundle:admin\Page:new }
