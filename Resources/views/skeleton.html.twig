@@ -7,6 +7,7 @@
     {% block css %}
     <link href="{{ asset('/bundles/msicontent/css/reset.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/960.css') }}" media="all" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/bundles/msicontent/css/superfish.css') }}" media="all" type="text/css" rel="stylesheet" />
         <link href="{{ asset('/bundles/msicontent/css/style.css') }}" media="all" type="text/css" rel="stylesheet" />
         <!--[if IE]>
           <link href="{{ asset('/bundles/msicontent/css/ie-sucks.css') }}" media="all" type="text/css" rel="stylesheet" />
@@ -24,13 +25,21 @@
     <div id="header">
         <div class="container_12">
             <div class="grid_12">
-                <h2 style="background:#212121;float:left;padding:10px;margin:10px;">SecurFinance</h2>
+                <h2 style="background:#212121;float:left;padding:10px;margin:10px;">Groupe MSI</h2>
             </div>
             <div class="grid_12">
-                <ul id="menu" class="box">
+                <ul id="menu" class="box sf-menu">
                     {% block menu %}
                         <li><a href="{{ path('page') }}">Users</a></li>
-                        <li><a href="{{ path('page') }}">Content</a></li>             
+                        <li><a href="{{ path('page') }}">Content</a>
+                            <ul>
+                                <li><a href="{{ path('page') }}">Pages</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('page_category') }}">Categories</a>
+                                    <li><a href="{{ path('layout') }}">Layouts</a>
+                                {% endif %}
+                            </ul>
+                        </li>             
                     {% endblock %}
                 </ul>
             </div>

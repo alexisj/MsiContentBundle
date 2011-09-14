@@ -2,6 +2,18 @@ MsiContentBundle_page:
     resource: "@MsiContentBundle/Resources/config/routing/page.yml"
     prefix:   /admin/page
 
+MsiContentBundle_page_category:
+    resource: "@MsiContentBundle/Resources/config/routing/page_category.yml"
+    prefix:   /admin/page/category
+
+MsiContentBundle_layout:
+    resource: "@MsiContentBundle/Resources/config/routing/layout.yml"
+    prefix:   /admin/layout
+
+homepage_admin:
+  pattern: /admin/
+  defaults: { _controller: MsiContentBundle:admin\Page:index }
+
 homepage:
   pattern: /
   defaults: { _controller: MsiContentBundle:Page:index }

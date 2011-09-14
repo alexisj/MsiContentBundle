@@ -31,7 +31,7 @@ class PageRepository extends EntityRepository
   public function findPage($slug = null)
   {
     $q = $this->createQueryBuilder('a')
-      ->where('a.published = 1');
+      ->where('a.status = 1');
     if ($slug) {
       $q->andWhere('a.slug = ?1')
         ->setParameter(1, $slug);

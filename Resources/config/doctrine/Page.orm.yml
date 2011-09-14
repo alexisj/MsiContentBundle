@@ -30,7 +30,7 @@ Msi\ContentBundle\Entity\Page:
           separator: -
     homepage:
       type: boolean
-    published:
+    status:
       type: boolean
     created:
       type: datetime

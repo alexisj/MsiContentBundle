@@ -4,7 +4,7 @@
 .box {
     background-color: #eeeeee;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.1) inset;
-    padding:15px;
+    padding:10px;
 }
 
 body {
@@ -103,19 +103,25 @@ h3 {
 #footer {
     
 }
-.page-header {
+/*********************
+    Toolbar
+*********************/
+.toolbar {
+  float: right;
   margin-bottom:15px;
 }
-.page-header ul {
-  text-align:right;
-}
-.page-header ul li {
-  display:inline;
-}
-.page-header h1 {
+.toolbar ul li {
   float:left;
+  text-align:center;
+  margin:0 10px;
 }
-
+.toolbar span {
+  display: block;
+  float: none;
+  height: 32px;
+  margin: 0 auto;
+  width: 32px;
+}
 /*********************
     Tables
 *********************/
@@ -153,79 +159,74 @@ td {
 form {
     
 }
+label {
+
+}
+input[type="text"] {
+  background:#fff;
+  border:1px solid #323232;
+  padding:5px;
+  width:210px;
+  font-family: Arial, sans-serif;
+  font-size:12px;
+}
 select {
+  border:1px solid #323232;
+  padding:5px;
+}
+textarea {
+  border:1px solid #323232;
+  padding:5px;
+  font-family: Arial, sans-serif;
+  font-size:12px;
+}
+.input.small {
+  width: 130px;
+}
+.input.medium {
+  width: 210px;
+}
+.input.long {
+  width: 290px;
+}
+form.filter select {
   padding:3px;
   border:none;
 }
-option {
-
-}
-label {
+form.filter label {
   padding:6px;
   display:block;
   float:left;
   background:#606870;
   color:#eeeeee;
 }
-.field {
+form.filter .field {
     background:#fff;
     border:1px solid #323232;
     margin-right:10px;
     float:left;
 }
-.field.last {
+form.filter .field.last {
     margin-right:0;
 }
-.reset {
+form.filter .reset {
     display:block;
     padding:6px;
 }
-.reset:hover {
+form.filter .reset:hover {
     background:#606870;
     color:#fff;
 }
 /*********************
     Menus
 *********************/
-
 #menu {
-  overflow:hidden;
+  margin-bottom:0;
 }
 
 #menu li {
-  float:left;
-}
-
-#menu a, #menu a:visited {
-    display:block;
-    text-align:center;
-    text-decoration:none;
-    margin:0 10px;
-    width:60px;
-    padding:10px 0;
-}
-
-#menu .current a, #menu .current a:hover, #menu .current a:visited {
-  padding:5px 12px 5px 12px;
-  font-weight:bold;
-  
-}
-
-#menu a,#menu a:visited{
-  color:#FFF;
-  background:#4a525a;
-}
-
-#menu a:hover{
-  color: #375a90;
-  background:#fff;
-}
-
-#menu .current a, #menu .current a:hover, #menu .current a:visited{
-  color:#294145;
-  background: #FFF url(../images/bg_menu_mix.jpg) repeat-x top;
-  border-left: #FFF 1px solid;
-  border-right: #FFF 1px solid;
+  width:120px;
+  margin-right:20px;
 }
 
 .panel {
@@ -242,9 +243,6 @@ label {
     text-decoration:underline;
 }
 
-
-
-.page {background:transparent url(../images/fatcow/small/page.png) no-repeat left;}
 
 /*********************
 	Custom
@@ -280,18 +278,18 @@ label {
 	Pagination
 *********************/
 
-#pagination-digg {
-    clear: both;
-    line-height: 25px;
+.pagination {
+    float:right;
 }
-#pagination-digg ul {
-    line-height: 30px;
+.pagination ul {
+    line-height: 23px;
     margin: 0 auto;
     overflow: hidden;
     text-align: center;
     width: 100%;
+    padding:1px 0;
 }
-#pagination-digg li {
+.pagination li {
     border: 0 none;
     display: inline;
     font-size: 11px;
@@ -299,34 +297,47 @@ label {
     margin-right: 2px;
     padding: 0;
 }
-#pagination-digg a {
-    border: 1px solid #000000;
+.pagination a {
+    border: 1px solid #323232;
     display: inline;
     margin-right: 2px;
+    padding:5px 8px;
 }
-#pagination-digg .previous-off, #pagination-digg .next-off {
+.pagination .first, .pagination .last {
     color: #888888;
     display: inline;
     font-weight: bold;
     margin-right: 2px;
-    padding: 3px 4px;
 }
-#pagination-digg .next a, #pagination-digg .previous a {
+.pagination .last, .pagination .last a {
+  margin-right: 0px;
+}
+.pagination .next a, .pagination .previous a {
     font-weight: bold;
 }
-#pagination-digg .active {
-    background: none repeat scroll 0 0 #F7C844;
-    color: #000000;
+.pagination .active a {
+    background: none repeat scroll 0 0 #4A525A;
+    color: #eeeeee !important;
     display: inline;
     font-weight: bold;
-    padding: 4px 6px;
+    cursor:default;
 }
-#pagination-digg a:link, #pagination-digg a:visited {
-    color: #0E509E;
+.pagination a:link, .pagination a:visited {
     display: inline;
-    padding: 3px 6px;
     text-decoration: none;
 }
-#pagination-digg a:hover {
-    border: 1px solid #F7C844;
+.pagination a:hover {
+    background:#4A525A;
+    color: #eeeeee !important;
 }
+.disabled a {
+  cursor:default;
+  background:#4A525A;
+  color: #eeeeee !important;
+}
+
+.icon-32-add { background:url(../images/fatcow/32/add.png); }
+.icon-32-pencil { background:url(../images/fatcow/32/pencil.png); }
+.icon-32-delete { background:url(../images/fatcow/32/delete.png); }
+.icon-32-accept { background:url(../images/fatcow/32/accept.png); }
+.icon-32-accept_grey { background:url(../images/fatcow/32/accept_grey.png); }

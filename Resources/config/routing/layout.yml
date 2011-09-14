@@ -1,0 +1,27 @@
+layout:
+  pattern:  /
+  defaults: { _controller: MsiContentBundle:admin\Layout:index }
+
+layout_new:
+  pattern:  /new/
+  defaults: { _controller: MsiContentBundle:admin\Layout:new }
+
+layout_create:
+  pattern:  /create/
+  defaults: { _controller: MsiContentBundle:admin\Layout:create }
+    
+layout_edit:
+  pattern:  /{id}/edit/
+  defaults: { _controller: MsiContentBundle:admin\Layout:edit }
+  requirements:
+    id: \d+
+
+layout_update:
+  pattern:  /{id}/update/
+  defaults: { _controller: MsiContentBundle:admin\Layout:update }
+  requirements:
+    id: \d+
+
+layout_reset_filters:
+  pattern:  /reset/filters/
+  defaults: { _controller: MsiContentBundle:admin\Layout:resetFilters }

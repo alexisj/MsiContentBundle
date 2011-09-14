@@ -1,0 +1,27 @@
+page_category:
+  pattern:  /
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:index }
+
+page_category_new:
+  pattern:  /new/
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:new }
+
+page_category_create:
+  pattern:  /create/
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:create }
+    
+page_category_edit:
+  pattern:  /{id}/edit/
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:edit }
+  requirements:
+    id: \d+
+
+page_category_update:
+  pattern:  /{id}/update/
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:update }
+  requirements:
+    id: \d+
+
+page_category_reset_filters:
+  pattern:  /reset/filters/
+  defaults: { _controller: MsiContentBundle:admin\PageCategory:resetFilters }

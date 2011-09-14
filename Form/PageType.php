@@ -15,7 +15,7 @@ class PageType extends AbstractType
             ->add('body')
             ->add('unique_title')
             ->add('homepage', null, array('required' => false))
-            ->add('published', null, array('required' => false))
+            ->add('status', null, array('required' => false))
             ->add('pageCategory')
         ;
     }

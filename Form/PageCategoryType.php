@@ -11,14 +11,19 @@ class PageCategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('status')
-            ->add('created')
-            ->add('updated')
+            ->add('status', null, array('required' => false))
         ;
     }
 
     public function getName()
     {
         return 'msi_cms_bundle_ContentBundle_pagecategorytype';
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Msi\ContentBundle\Entity\PageCategory',
+        );
     }
 }

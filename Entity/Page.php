@@ -56,11 +56,6 @@ class Page
     private $homepage;
 
     /**
-     * @var boolean $published
-     */
-    private $published;
-
-    /**
      * @var datetime $created
      */
     private $created;
@@ -257,26 +252,6 @@ class Page
     }
 
     /**
-     * Set published
-     *
-     * @param boolean $published
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-    }
-
-    /**
-     * Get published
-     *
-     * @return boolean 
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    /**
      * Set created
      *
      * @param datetime $created
@@ -374,5 +349,30 @@ class Page
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * @var boolean $status
+     */
+    private $status;
+
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

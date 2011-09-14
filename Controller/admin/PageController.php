@@ -12,22 +12,10 @@ class PageController extends Controller
   {
     $session = $this->get('session');
     
-    if ($this->get('request')->getMethod() == 'POST') {
-      $request = $this->get('request')->request;
-      $session->set('limit', $request->get('limit'));
-      $session->set('filters', $request->get('filters'));
-      return $this->redirect($this->generateUrl('page'));
-    }
-    
-    // Default filters.
     if (!$session->has('limit')) $session->set('limit', 15);
-    if (!$session->has('filters')) $session->set('filters', array(
-      'page_category_id' => -1,
-      'published' => -1,
-      'user_id' => -1,
-    ));
+    if (!$session->has('page_filters')) $this->setDefaultFilters();
     
-    $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('filters'));
+    $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('page_filters'));
     
     $adapter = $this->get('knp_paginator.adapter');
     $adapter->setQuery($query);
@@ -50,73 +38,126 @@ class PageController extends Controller
 
   public function newAction()
   {
-    $page = new Page;
-    $form = $this->createForm(new PageType, $page);
+    $entity = new Page;
+    $form = $this->createForm(new PageType, $entity);
     return $this->render('MsiContentBundle:Page:admin/new.html.twig', array('form' => $form->createView()));
   }
 
   public function createAction()
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $page = new Page;
+    $entity = new Page;
     
-    $form = $this->createForm(new PageType(), $page);
+    $form = $this->createForm(new PageType(), $entity);
     
     $form->bindRequest($this->getRequest());
-    $page->setUser($this->get('security.context')->getToken()->getUser());
+
+    $entity->setUser($this->get('security.context')->getToken()->getUser());
     
     if ($form->isValid()) {
-      $em->persist($page);
+      $em->persist($entity);
       $em->flush();
       
       $this->get('session')->setFlash('notice', 'Your changes were saved!');
       
       return $this->redirect($this->generateUrl('page'));
     } else {
-      return $this->render('MsiContentBundle:Page:admin/new.html.twig', array('page' => $page, 'form' => $form->createView()));
+      return $this->render('MsiContentBundle:Page:admin/new.html.twig', array('form' => $form->createView()));
     }  
   }
   
   public function editAction($id)
   {
-    $page = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->find($id);
+    $entity = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->find($id);
     
-    $form = $this->createForm(new PageType(), $page);
+    $form = $this->createForm(new PageType(), $entity);
     
-    return $this->render('MsiContentBundle:Page:admin/edit.html.twig', array('page' => $page, 'form' => $form->createView()));
+    return $this->render('MsiContentBundle:Page:admin/edit.html.twig', array('id' => $id, 'form' => $form->createView()));
   }
   
   public function updateAction($id)
   {
     $em = $this->getDoctrine()->getEntityManager();
-    $page = $em->getRepository('MsiContentBundle:Page')->find($id);
-    $form = $this->createForm(new PageType(), $page);
+    $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
+    $form = $this->createForm(new PageType(), $entity);
     
     $form->bindRequest($this->getRequest());
     
     if ($form->isValid()) {
-      $em->persist($page);
+      $em->persist($entity);
       $em->flush();
       
       $this->get('session')->setFlash('notice', 'Your changes were saved!');
       
       return $this->redirect($this->generateUrl('page'));
     } else {
-      return $this->render('MsiContentBundle:Page:admin/edit.html.twig', array('page' => $page, 'form' => $form->createView()));
+      return $this->render('MsiContentBundle:Page:admin/edit.html.twig', array('id' => $id, 'form' => $form->createView()));
     }
+  }
+
+  public function batchAction()
+  {
+    $request = $this->get('request')->request;
+    $em = $this->getDoctrine()->getEntityManager();
+
+    $this->get('session')->set('limit', $request->get('limit'));
+
+    $ids = $request->get('ids');
+    $batch_action = $request->get('batch_action');
+
+    if ($ids) {
+      if ($batch_action == 'delete') {
+        foreach ($ids as $id) {
+          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
+          $em->remove($entity);
+          $em->flush();
+        }
+      }
+      if ($batch_action == 'edit') {
+        return $this->redirect($this->generateUrl('page_edit', array('id' => $ids[0])));
+      }
+      if ($batch_action == 'publish') {
+        foreach ($ids as $id) {
+          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
+          $entity->setStatus(true);
+          $em->persist($entity);
+          $em->flush();
+        }
+      }
+      if ($batch_action == 'unpublish') {
+        foreach ($ids as $id) {
+          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
+          $entity->setStatus(false);
+          $em->persist($entity);
+          $em->flush();
+        }
+      }
+    }
+
+    return $this->redirect($this->generateUrl('page'));
   }
   
   public function resetFiltersAction()
   {
+    $this->setDefaultFilters();
+    return $this->redirect($this->generateUrl('page'));
+  }
+
+  public function setFiltersAction()
+  {
     $session = $this->get('session');
-    // Default filters.
-    $session->set('limit', 15);
-    $session->set('filters', array(
+    $request = $this->get('request')->request;
+    $session->set('page_filters', $request->get('page_filters'));
+    return $this->redirect($this->generateUrl('page'));
+  }
+
+  protected function setDefaultFilters()
+  {
+    $session = $this->get('session');
+    $session->set('page_filters', array(
       'page_category_id' => -1,
-      'published' => -1,
+      'status' => -1,
       'user_id' => -1,
     ));
-
-    return $this->redirect($this->generateUrl('page'));
   }
 }

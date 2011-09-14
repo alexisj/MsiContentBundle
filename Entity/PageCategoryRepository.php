@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class PageCategoryRepository extends EntityRepository
 {
+  public function findWithFilters(array $filters = array())
+  {
+    $q = $this->createQueryBuilder('a');
+    
+    foreach ($filters as $key => $value) {
+      if ($value != -1) {
+        $q->andWhere('a.'.$key.' = :'.$key)
+          ->setParameter($key, $value);
+      }
+    }
+    
+    $q->orderBy('a.name', 'ASC');
+    
+    return $q->getQuery();
+  }
 }

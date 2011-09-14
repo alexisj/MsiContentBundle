@@ -1,0 +1,83 @@
+{% extends 'MsiContentBundle::skeleton.html.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>Categories</h1>
+        <ul class="unstyled">
+            <li><a href="{{ path('page_category_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_add.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_category_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_edit.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_category_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_delete.png') }}" alt="add" /></a></li>
+            <li><a href="{{ path('page_category_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/help.png') }}" alt="add" /></a></li>
+        </ul>
+    </div>
+
+  <form class="filter" action="" method="POST">
+    <fieldset>
+        <div class="field">
+            <label>Status: </label>
+            <select class="medium" onchange="this.form.submit()" name="page_category_filters[status]">
+                <option {% if session.get('page_category_filters').status == -1 %} selected="selected" {% endif %} value="-1">All</option>
+                <option {% if session.get('page_category_filters').status == 1 %} selected="selected" {% endif %} value="1">Published</option>
+                <option {% if session.get('page_category_filters').status == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
+            </select>
+        </div>
+        <div class="field">
+          <a class="reset" href="{{ path('page_category_reset_filters') }}">Reset</a>
+        </div>
+
+  <script >
+    $(function() {
+      $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
+    });
+  </script>
+
+  <table id="my-table">
+    <thead>
+      <tr>
+        <th><input type="checkbox" value="3" name=""></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in paginator %}
+        <tr>
+          <td><input type="checkbox" value="3" name=""></td>
+          <td>{{ row.id }}</td>
+          <td class="text-left">{{ row.name }}</td>
+          <td>
+            {% if row.status %}
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept.png') }}" alt="published" />
+              <span class="hidden">1</span>
+            {% else %}
+              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
+              <span class="hidden">0</span>
+            {% endif %}
+          </td>
+          <td>{{ row.updated|date('d-m-Y') }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+          <div class="field">
+            <label>Display: </label>
+            <select class="medium" onchange="this.form.submit()" name="limit">
+                <option {% if session.get('limit') == -1 %} selected="selected" {% endif %} value="-1">All</option>
+                <option {% if session.get('limit') == 5 %} selected="selected" {% endif %} value="5">5</option>
+                <option {% if session.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
+                <option {% if session.get('limit') == 15 %} selected="selected" {% endif %} value="15">15</option>
+                <option {% if session.get('limit') == 20 %} selected="selected" {% endif %} value="20">20</option>
+                <option {% if session.get('limit') == 25 %} selected="selected" {% endif %} value="25">25</option>
+                <option {% if session.get('limit') == 30 %} selected="selected" {% endif %} value="30">30</option>
+                <option {% if session.get('limit') == 50 %} selected="selected" {% endif %} value="50">50</option>
+                <option {% if session.get('limit') == 100 %} selected="selected" {% endif %} value="100">100</option>
+            </select>
+        </div>
+      </fieldset>
+  </form>
+  {{ paginator|paginate }}
+
+{% endblock %}

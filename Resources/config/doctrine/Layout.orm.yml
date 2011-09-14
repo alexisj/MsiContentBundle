@@ -9,4 +9,14 @@ Msi\ContentBundle\Entity\Layout:
         strategy: AUTO
     name:
       type: string
+    created:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: create
+    updated:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
   lifecycleCallbacks: {  }

@@ -1,0 +1,9 @@
+{% extends 'MsiContentBundle::skeleton.html.twig' %}
+{% block content %}
+  <a class="right btn" href="{{ path('page_category') }}">Back</a>
+  <h2>Edit category</h2>
+  
+  <form action="{{ path('page_category_update', {'id': id}) }}" method="post" {{ form_enctype(form) }}>
+    {% include 'MsiContentBundle:PageCategory:admin/form.html.twig' %}
+  </form>
+{% endblock %}

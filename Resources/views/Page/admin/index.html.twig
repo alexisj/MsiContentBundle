@@ -1,16 +1,57 @@
 {% extends 'MsiContentBundle::skeleton.html.twig' %}
 
 {% block content %}
+    
+    <script>
+      function submitForm(batch_action)
+      {
+        document.getElementById('batch-action').value = batch_action;
+        document.getElementById('adminForm').submit();
+      }
+      function checkAll()
+      {
+        var adminForm = document.getElementById('adminForm');
+        for (var i = 0 ; adminForm.elements.length > i ; i++) {
+          if (adminForm.elements[i].checked == false) {
+            adminForm.elements[i].checked = true;
+          } else {
+            adminForm.elements[i].checked = false;
+          }
+        }
+      }
+    </script>
+    <div class="toolbar">
+      <ul>
+        <li><a href="{{ path('page_new') }}">
+          <span class="icon-32-add"></span>
+          New
+        </a></li>
 
-    <div class="page-header">
-        <h1>Pages</h1>
-        <ul class="unstyled">
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_add.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_edit.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/page_delete.png') }}" alt="add" /></a></li>
-            <li><a href="{{ path('page_new') }}"><img src="{{ asset('/bundles/msicontent/images/fatcow/32/help.png') }}" alt="add" /></a></li>
-        </ul>
+        <li><a href="#" onclick="submitForm('edit')">
+          <span class="icon-32-pencil"></span>
+          Edit
+        </a></li>
+
+        <li><a href="#" onclick="submitForm('publish')">
+          <span class="icon-32-accept"></span>
+          Publish
+        </a></li>
+
+        <li><a href="#" onclick="submitForm('unpublish')">
+          <span class="icon-32-accept_grey"></span>
+          Unpublish
+        </a></li>
+
+        <li><a href="#" onclick="submitForm('delete')">
+          <span class="icon-32-delete"></span>
+          Delete
+        </a></li>
+      </ul>
     </div>
+
+    <h1>Pages</h1>
+
+    <div class="clear"></div>
 
   {% if app.session.hasFlash('notice') %}
     <div class="alert-message success">
@@ -21,81 +62,88 @@
     </div>
   {% endif %}
 
-  <form class="form filter" action="" method="POST">
+  <form id="filterForm" class="filter" action="{{ path('page_filter') }}" method="POST">
     <fieldset>
         <div class="field">
             <label>Status: </label>
-            <select class="medium" onchange="this.form.submit()" name="filters[published]">
-                <option {% if session.get('filters').published == -1 %} selected="selected" {% endif %} value="-1">All</option>
-                <option {% if session.get('filters').published == 1 %} selected="selected" {% endif %} value="1">Published</option>
-                <option {% if session.get('filters').published == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
+            <select class="medium" onchange="this.form.submit()" name="page_filters[status]">
+                <option {% if session.get('page_filters').status == -1 %} selected="selected" {% endif %} value="-1">All</option>
+                <option {% if session.get('page_filters').status == 1 %} selected="selected" {% endif %} value="1">Published</option>
+                <option {% if session.get('page_filters').status == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
             </select>
         </div>
         <div class="field">
             <label>Category: </label>
-            <select class="medium" onchange="this.form.submit()" name="filters[page_category_id]">
-                <option {% if session.get('filters').page_category_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
+            <select class="medium" onchange="this.form.submit()" name="page_filters[page_category_id]">
+                <option {% if session.get('page_filters').page_category_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
                 {% for row in pageCategories %}
-                <option {% if session.get('filters').page_category_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.name }}</option>
+                <option {% if session.get('page_filters').page_category_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.name }}</option>
             {% endfor %}
             </select>
         </div>
         <div class="field">
             <label>Author: </label>
-            <select class="medium" onchange="this.form.submit()" name="filters[user_id]">
-                <option {% if session.get('filters').user_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
+            <select class="medium" onchange="this.form.submit()" name="page_filters[user_id]">
+                <option {% if session.get('page_filters').user_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
                 {% for row in users %}
-                <option {% if session.get('filters').user_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.username }}</option>
+                <option {% if session.get('page_filters').user_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.username }}</option>
             {% endfor %}
             </select>
         </div>
         <div class="field">
           <a class="reset" href="{{ path('page_reset_filters') }}">Reset</a>
         </div>
+    </fieldset>
+  </form>
 
-  <script >
-    $(function() {
-      $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
-    });
-  </script>
+  <form id="adminForm" class="filter" action="{{ path('page_batch') }}" method="POST">
+    <fieldset>
 
-  <table id="my-table">
-    <thead>
-      <tr>
-        <th><input type="checkbox" value="3" name=""></th>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Category</th>
-        <th>Created by</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in paginator %}
-        <tr>
-          <td><input type="checkbox" value="3" name=""></td>
-          <td>{{ row.id }}</td>
-          <td class="text-left">{{ row.title }}</td>
-          <td>
-            {% if row.published %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept.png') }}" alt="published" />
-              <span class="hidden">1</span>
-            {% else %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
-              <span class="hidden">0</span>
-            {% endif %}
-          </td>
-          <td>{{ row.pageCategory.name }}</td>
-          <td>{{ row.user.username }}</td>
-          <td>{{ row.updated|date('d-m-Y') }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      <input id="batch-action" type="hidden" name="batch_action" value="" />
+
+      <script >
+        $(function() {
+          $('table#my-table').tablesorter({ sortList:[[0,0]], headers: {6: {sorter: false}} });
+        });
+      </script>
+
+      <table id="my-table">
+        <thead>
+          <tr>
+            <th><input onclick="checkAll(this)" type="checkbox" /></th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Created by</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in paginator %}
+            <tr>
+              <td><input type="checkbox" value="{{ row.id }}" name="ids[]" /></td>
+              <td>{{ row.id }}</td>
+              <td class="text-left">{{ row.title }}</td>
+              <td>
+                {% if row.status %}
+                  <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept.png') }}" alt="published" />
+                  <span class="hidden">1</span>
+                {% else %}
+                  <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
+                  <span class="hidden">0</span>
+                {% endif %}
+              </td>
+              <td>{{ row.pageCategory.name }}</td>
+              <td>{{ row.user.username }}</td>
+              <td>{{ row.updated|date('d-m-Y') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
           <div class="field">
             <label>Display: </label>
-            <select class="medium" onchange="this.form.submit()" name="limit">
+            <select id="selector_limit" class="medium" onchange="this.form.submit()" name="limit">
                 <option {% if session.get('limit') == -1 %} selected="selected" {% endif %} value="-1">All</option>
                 <option {% if session.get('limit') == 5 %} selected="selected" {% endif %} value="5">5</option>
                 <option {% if session.get('limit') == 10 %} selected="selected" {% endif %} value="10">10</option>
@@ -107,8 +155,8 @@
                 <option {% if session.get('limit') == 100 %} selected="selected" {% endif %} value="100">100</option>
             </select>
         </div>
+        {{ paginator|paginate }}
       </fieldset>
   </form>
-  {{ paginator|paginate }}
 
 {% endblock %}

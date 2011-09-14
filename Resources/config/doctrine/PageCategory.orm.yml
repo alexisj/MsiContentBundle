@@ -1,6 +1,7 @@
 Msi\ContentBundle\Entity\PageCategory:
   type: entity
   table: page_category
+  repositoryClass: Msi\ContentBundle\Entity\PageCategoryRepository
   fields:
     id:
       type: integer
