@@ -10,13 +10,13 @@ class PageController extends Controller
 {
   public function indexAction()
   {
-    $page = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findPage();
+    $page = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findOneActiveBySlug();
     return $this->render('MsiContentBundle:Page:index.html.twig', array('page' => $page));
   }
   
   public function showAction($slug)
   {
-    $page = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findPage($slug);
+    $page = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findOneActiveBySlug($slug);
     return $this->render('MsiContentBundle:Page:index.html.twig', array('page' => $page));
   }
 }

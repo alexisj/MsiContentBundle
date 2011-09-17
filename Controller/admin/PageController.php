@@ -49,17 +49,14 @@ class PageController extends Controller
     $entity = new Page;
     
     $form = $this->createForm(new PageType(), $entity);
-    
     $form->bindRequest($this->getRequest());
-
-    $entity->setUser($this->get('security.context')->getToken()->getUser());
     
     if ($form->isValid()) {
+      $entity->setUser($this->get('security.context')->getToken()->getUser());
       $em->persist($entity);
       $em->flush();
       
       $this->get('session')->setFlash('success', 'Your changes were saved!');
-      
       return $this->redirect($this->generateUrl('page'));
     } else {
       return $this->render('MsiContentBundle:Page:admin/new.html.twig', array('form' => $form->createView()));
@@ -102,34 +99,21 @@ class PageController extends Controller
     $em = $this->getDoctrine()->getEntityManager();
 
     $ids = $request->get('ids');
-    $batch_action = $request->get('batch_action');
 
     if ($ids) {
-      if ($batch_action == 'delete') {
-        foreach ($ids as $id) {
-          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
-          $em->remove($entity);
-          $em->flush();
-        }
-      }
-      if ($batch_action == 'edit') {
-        return $this->redirect($this->generateUrl('page_edit', array('id' => $ids[0])));
-      }
-      if ($batch_action == 'publish') {
-        foreach ($ids as $id) {
-          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
-          $entity->setStatus(true);
-          $em->persist($entity);
-          $em->flush();
-        }
-      }
-      if ($batch_action == 'unpublish') {
-        foreach ($ids as $id) {
-          $entity = $em->getRepository('MsiContentBundle:Page')->find($id);
-          $entity->setStatus(false);
-          $em->persist($entity);
-          $em->flush();
-        }
+      switch($request->get('batch_action')) {
+        case 'edit':
+          return $this->redirect($this->generateUrl('page_edit', array('id' => $ids[0])));
+        break;
+        case 'publish':
+          $em->getRepository('MsiContentBundle:Page')->publish($ids, $em);
+        break;
+        case 'unpublish':
+          $em->getRepository('MsiContentBundle:Page')->unpublish($ids, $em);
+        break;
+        case 'delete':
+          $em->getRepository('MsiContentBundle:Page')->delete($ids, $em);
+        break;
       }
     } else {
       $session->setFlash('error', 'You must at least select one item.');
@@ -159,15 +143,5 @@ class PageController extends Controller
       'status' => -1,
       'user_id' => -1,
     ));
-  }
-
-  public function setLimitAction()
-  {
-    $session = $this->get('session');
-    $request = $this->get('request')->request;
-
-    $session->set('limit', $request->get('limit'));
-
-    return $this->redirect($this->generateUrl('page'));
   }
 }

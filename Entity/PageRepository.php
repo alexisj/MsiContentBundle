@@ -15,20 +15,17 @@ class PageRepository extends EntityRepository
   public function findWithFilters(array $filters = array())
   {
     $q = $this->createQueryBuilder('a');
-    
     foreach ($filters as $key => $value) {
       if ($value != -1) {
         $q->andWhere('a.'.$key.' = :'.$key)
           ->setParameter($key, $value);
       }
     }
-    
     $q->orderBy('a.title', 'ASC');
-    
     return $q->getQuery();
   }
-  
-  public function findPage($slug = null)
+
+  public function findOneActiveBySlug($slug = null)
   {
     $q = $this->createQueryBuilder('a')
       ->where('a.status = 1');
@@ -38,7 +35,35 @@ class PageRepository extends EntityRepository
     } else {
       $q->andWhere('a.home = 1');
     }
-      
     return $q->getQuery()->getSingleResult();
+  }
+
+  public function unpublish(array $ids, $em)
+  {
+    foreach ($ids as $id) {
+      $entity = $this->find($id);
+      $entity->setStatus(false);
+      $em->persist($entity);
+      $em->flush();
+    }
+  }
+
+  public function publish(array $ids, $em)
+  {
+    foreach ($ids as $id) {
+      $entity = $this->find($id);
+      $entity->setStatus(true);
+      $em->persist($entity);
+      $em->flush();
+    }
+  }
+
+  public function delete(array $ids, $em)
+  {
+    foreach ($ids as $id) {
+      $entity = $this->find($id);
+      $em->remove($entity);
+      $em->flush();
+    }
   }
 }

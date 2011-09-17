@@ -1,22 +1,22 @@
-MsiContentBundle_page:
-    resource: "@MsiContentBundle/Resources/config/routing/page.yml"
-    prefix:   /admin/page
-
-MsiContentBundle_page_category:
-    resource: "@MsiContentBundle/Resources/config/routing/page_category.yml"
-    prefix:   /admin/page/category
-
-MsiContentBundle_layout:
-    resource: "@MsiContentBundle/Resources/config/routing/layout.yml"
-    prefix:   /admin/layout
-
-homepage_admin:
-  pattern: /admin/
-  defaults: { _controller: MsiContentBundle:admin\Page:index }
-
 homepage:
   pattern: /
   defaults: { _controller: MsiContentBundle:Page:index }
+
+admin_homepage:
+  pattern: /admin/
+  defaults: { _controller: MsiContentBundle:admin\Page:index }
+
+admin_page:
+    resource: "@MsiContentBundle/Resources/config/routing/admin/page.yml"
+    prefix:   /admin/page
+
+admin_page_category:
+    resource: "@MsiContentBundle/Resources/config/routing/admin/page_category.yml"
+    prefix:   /admin/page/category
+
+admin_layout:
+    resource: "@MsiContentBundle/Resources/config/routing/admin/layout.yml"
+    prefix:   /admin/layout
     
 static:
   pattern: /{slug}/
