@@ -6,10 +6,6 @@ page_batch:
   pattern:  /batch/
   defaults: { _controller: MsiContentBundle:admin\Page:batch }
 
-page_filter:
-  pattern:  /filter
-  defaults: { _controller: MsiContentBundle:admin\Page:setFilters }
-
 page_new:
   pattern:  /new/
   defaults: { _controller: MsiContentBundle:admin\Page:new }
@@ -29,7 +25,3 @@ page_update:
   defaults: { _controller: MsiContentBundle:admin\Page:update }
   requirements:
     id: \d+
-
-page_reset_filters:
-  pattern:  /filter/reset
-  defaults: { _controller: MsiContentBundle:admin\Page:resetFilters }

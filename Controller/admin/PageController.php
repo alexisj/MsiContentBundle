@@ -13,9 +13,8 @@ class PageController extends Controller
     $session = $this->get('session');
     
     if (!$session->has('limit')) $session->set('limit', 15);
-    if (!$session->has('page_filters')) $this->setDefaultFilters();
     
-    $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('page_filters'));
+    $query = $this->getDoctrine()->getRepository('MsiContentBundle:Page')->findWithFilters($session->get('filters', array()));
     
     $adapter = $this->get('knp_paginator.adapter');
     $adapter->setQuery($query);
@@ -119,29 +118,5 @@ class PageController extends Controller
       $session->setFlash('error', 'You must at least select one item.');
     }
     return $this->redirect($this->generateUrl('page'));
-  }
-  
-  public function resetFiltersAction()
-  {
-    $this->setDefaultFilters();
-    return $this->redirect($this->generateUrl('page'));
-  }
-
-  public function setFiltersAction()
-  {
-    $session = $this->get('session');
-    $request = $this->get('request')->request;
-    $session->set('page_filters', $request->get('page_filters'));
-    return $this->redirect($this->generateUrl('page'));
-  }
-
-  protected function setDefaultFilters()
-  {
-    $session = $this->get('session');
-    $session->set('page_filters', array(
-      'page_category_id' => -1,
-      'status' => -1,
-      'user_id' => -1,
-    ));
   }
 }

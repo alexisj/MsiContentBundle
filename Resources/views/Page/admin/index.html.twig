@@ -32,40 +32,48 @@
   <h1>Pages</h1>
   <div class="clear"></div>
 
-  <form id="filterForm" class="filter" action="{{ path('page_filter') }}" method="POST">
+  <form id="filterForm" class="filter" action="{{ path('filter', {'return_route' : 'page'}) }}" method="POST">
     <fieldset>
       <div class="left">
         Filters:
       </div>
       <div class="field">
         <label>Status: </label>
-        <select class="medium" onchange="this.form.submit()" name="page_filters[status]">
-          <option {% if session.get('page_filters').status == -1 %} selected="selected" {% endif %} value="-1">All</option>
-          <option {% if session.get('page_filters').status == 1 %} selected="selected" {% endif %} value="1">Published</option>
-          <option {% if session.get('page_filters').status == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
+        <select class="medium" onchange="this.form.submit()" name="filters[status]">
+          <option selected="selected" value="-1">All</option>
+          <option {% if session.get('filters').status is defined and session.get('filters').status == 1 %} selected="selected" {% endif %} value="1">Published</option>
+          <option {% if session.get('filters').status is defined and session.get('filters').status == 0 %} selected="selected" {% endif %} value="0">Unpublished</option>
         </select>
       </div>
       <div class="field">
         <label>Category: </label>
-        <select class="medium" onchange="this.form.submit()" name="page_filters[page_category_id]">
-          <option {% if session.get('page_filters').page_category_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
+        <select class="medium" onchange="this.form.submit()" name="filters[page_category_id]">
+          <option selected="selected" value="-1">All</option>
           {% for row in pageCategories %}
-            <option {% if session.get('page_filters').page_category_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.name }}</option>
+            <option {% if session.get('filters').page_category_id is defined and session.get('filters').page_category_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.name }}</option>
           {% endfor %}
         </select>
       </div>
       <div class="field">
         <label>Author: </label>
-        <select class="medium" onchange="this.form.submit()" name="page_filters[user_id]">
-          <option {% if session.get('page_filters').user_id == -1 %} selected="selected" {% endif %} value="-1">All</option>
+        <select class="medium" onchange="this.form.submit()" name="filters[user_id]">
+          <option selected="selected" value="-1">All</option>
           {% for row in users %}
-            <option {% if session.get('page_filters').user_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.username }}</option>
+            <option {% if session.get('filters').user_id is defined and session.get('filters').user_id == row.id %} selected="selected" {% endif %} value="{{ row.id }}">{{ row.username }}</option>
           {% endfor %}
         </select>
       </div>
-      <a class="btn left" href="{{ path('page_reset_filters') }}">Reset</a>
+      <a class="btn left" href="{{ path('reset_filter', {'return_route' : 'page'}) }}">Reset</a>
     </fieldset>
   </form>
+
+  <script>
+    $(document).ready(
+      function() { 
+        $("#my-table").tablesorter( {sortList: [[2,0]]} ); 
+      } 
+    );
+  </script>
 
   <form id="adminForm" class="filter" action="{{ path('page_batch') }}" method="POST">
     <fieldset>
@@ -90,10 +98,10 @@
             <td class="text-left">{{ row.title }}</td>
             <td>
             {% if row.status %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept.png') }}" alt="published" />
+              <img src="{{ asset('/bundles/msicore/images/fatcow/16/accept.png') }}" alt="published" />
               <span class="hidden">1</span>
             {% else %}
-              <img src="{{ asset('/bundles/msicontent/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
+              <img src="{{ asset('/bundles/msicore/images/fatcow/16/accept_grey.png') }}" alt="unpublished" />
               <span class="hidden">0</span>
             {% endif %}
             </td>
@@ -107,5 +115,6 @@
     </fieldset>
   </form>
   {{ paginator|paginate }}
+  <form class="filter" action="{{ path('limit', {'return_route' : 'page'}) }}" method="POST">
   {% include 'MsiCoreBundle:Form:limit.html.twig' %}
 {% endblock %}
