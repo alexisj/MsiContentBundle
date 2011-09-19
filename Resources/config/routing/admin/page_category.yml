@@ -21,7 +21,3 @@ page_category_update:
   defaults: { _controller: MsiContentBundle:admin\PageCategory:update }
   requirements:
     id: \d+
-
-page_category_reset_filters:
-  pattern:  /reset/filters/
-  defaults: { _controller: MsiContentBundle:admin\PageCategory:resetFilters }
